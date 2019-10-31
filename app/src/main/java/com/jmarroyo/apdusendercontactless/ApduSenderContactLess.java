@@ -992,8 +992,8 @@ public class ApduSenderContactLess extends Activity {
 
     private static String getHexString(byte[] data) throws Exception {
         String szDataStr = "";
-        for (int ii = 0; ii < data.length; ii++) {
-            szDataStr += String.format("%02X ", data[ii] & 0xFF);
+        for (byte datum : data) {
+            szDataStr += String.format("%02X ", datum & 0xFF);
         }
         return szDataStr;
     }
