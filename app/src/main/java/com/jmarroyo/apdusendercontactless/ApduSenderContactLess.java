@@ -712,21 +712,20 @@ public class ApduSenderContactLess extends Activity {
         else this.finish();
     }
 
-    public static void HideKbd() {
+    public void HideKbd() {
         if (mHexKbd.isCustomKeyboardVisible()) mHexKbd.hideCustomKeyboard();
     }
 
-    private static void clearlog() {
+    private void clearlog() {
         txtLog.setText("");
     }
 
-    private static void print(String s) {
+    private void print(String s) {
         txtLog.append(s);
         txtLog.append("\r\n");
-        return;
     }
 
-    private static byte[] transceives(byte[] data) {
+    private byte[] transceives(byte[] data) {
         byte[] ra = null;
 
         try {
@@ -756,7 +755,7 @@ public class ApduSenderContactLess extends Activity {
         return (ra);
     }
 
-    private static boolean bSendAPDU() {
+    private boolean bSendAPDU() {
         HideKbd();
 
         String StringAPDU;
@@ -933,10 +932,9 @@ public class ApduSenderContactLess extends Activity {
         txtDataIn.setText("APDU:");
         mCheckRaw.setChecked(true);
 
-        return;
     }
 
-    private static void vShowResponseInterpretation(byte[] data) {
+    private void vShowResponseInterpretation(byte[] data) {
 
         print("");
         print("====================================");
