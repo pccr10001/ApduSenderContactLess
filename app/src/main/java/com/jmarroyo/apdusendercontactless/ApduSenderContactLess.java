@@ -709,7 +709,10 @@ public class ApduSenderContactLess extends Activity {
         } else {
             icoCard.setImageResource(R.drawable.ic_icc_off);
         }
-        mAdapter.disableForegroundDispatch(this);
+
+        if(mAdapter != null) {
+            mAdapter.disableForegroundDispatch(this);
+        }
     }
 
     @Override
