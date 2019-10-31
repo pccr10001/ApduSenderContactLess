@@ -22,12 +22,14 @@ package com.jmarroyo.apdusendercontactless;
 import java.io.IOException;
 import java.util.Arrays;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -119,31 +121,31 @@ public class ApduSenderContactLess extends Activity
         mHexKbd.registerEditText(R.id.editDataIn);
         mHexKbd.registerEditText(R.id.editLe);
 
-        txtLog = (TextView) findViewById(R.id.textLog);
-        icoNfc = (ImageView) findViewById(R.id.imageNfc);
+        txtLog = findViewById(R.id.textLog);
+        icoNfc = findViewById(R.id.imageNfc);
         icoNfc.setImageResource(R.drawable.ic_nfc_off);
-        icoCard = (ImageView) findViewById(R.id.imageCard);
+        icoCard = findViewById(R.id.imageCard);
         icoCard.setImageResource(R.drawable.ic_icc_off);
-        TextNfc = (TextView) findViewById(R.id.textNfc);
-        TextCard = (TextView) findViewById(R.id.textCard);
+        TextNfc = findViewById(R.id.textNfc);
+        TextCard = findViewById(R.id.textCard);
 
-        txtCLA = (TextView) findViewById(R.id.textCLA);
-        txtINS = (TextView) findViewById(R.id.textINS);
-        txtP1 = (TextView) findViewById(R.id.textP1);
-        txtP2 = (TextView) findViewById(R.id.textP2);
-        txtLc = (TextView) findViewById(R.id.textLc);
-        txtDataIn = (TextView) findViewById(R.id.textDataIn);
-        txtLe = (TextView) findViewById(R.id.textLe);
+        txtCLA = findViewById(R.id.textCLA);
+        txtINS = findViewById(R.id.textINS);
+        txtP1 = findViewById(R.id.textP1);
+        txtP2 = findViewById(R.id.textP2);
+        txtLc = findViewById(R.id.textLc);
+        txtDataIn = findViewById(R.id.textDataIn);
+        txtLe = findViewById(R.id.textLe);
 
-        editCLA = (EditText) findViewById(R.id.editCLA);
-        editINS = (EditText) findViewById(R.id.editINS);
-        editP1 = (EditText) findViewById(R.id.editP1);
-        editP2 = (EditText) findViewById(R.id.editP2);
-        editLc = (EditText) findViewById(R.id.editLc);
-        editDataIn = (EditText) findViewById(R.id.editDataIn);
-        editLe = (EditText) findViewById(R.id.editLe);
+        editCLA = findViewById(R.id.editCLA);
+        editINS = findViewById(R.id.editINS);
+        editP1 = findViewById(R.id.editP1);
+        editP2 = findViewById(R.id.editP2);
+        editLc = findViewById(R.id.editLc);
+        editDataIn = findViewById(R.id.editDataIn);
+        editLe = findViewById(R.id.editLe);
 
-        mSendAPDUButton = (Button) findViewById(R.id.button_SendApdu);
+        mSendAPDUButton = findViewById(R.id.button_SendApdu);
         mSendAPDUButton.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -184,7 +186,7 @@ public class ApduSenderContactLess extends Activity
         });
 
 
-        mClearLogButton = (Button) findViewById(R.id.button_ClearLog);
+        mClearLogButton = findViewById(R.id.button_ClearLog);
         mClearLogButton.setOnClickListener(new OnClickListener() 
         {
             @Override
@@ -219,7 +221,7 @@ public class ApduSenderContactLess extends Activity
             }
         });
 
-        mSetNFCButton = (Button) findViewById(R.id.button_SetNFC);
+        mSetNFCButton = findViewById(R.id.button_SetNFC);
         mSetNFCButton.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -256,9 +258,10 @@ public class ApduSenderContactLess extends Activity
             }
         });
 
-        mPasteButton = (Button) findViewById(R.id.button_Paste);
+        mPasteButton = findViewById(R.id.button_Paste);
         mPasteButton.setOnClickListener(new OnClickListener()
         {
+            @TargetApi(Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onClick(View v) 
             {
@@ -296,7 +299,7 @@ public class ApduSenderContactLess extends Activity
             }
         });
         
-        mCheckRaw = (CheckBox) findViewById(R.id.check_box_raw);
+        mCheckRaw = findViewById(R.id.check_box_raw);
         mCheckRaw.setOnCheckedChangeListener(new OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
@@ -368,7 +371,7 @@ public class ApduSenderContactLess extends Activity
             }
         });
 
-        mCheckResp = (CheckBox) findViewById(R.id.check_box_resp);
+        mCheckResp = findViewById(R.id.check_box_resp);
         mCheckResp.setOnCheckedChangeListener(new OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
@@ -469,7 +472,7 @@ public class ApduSenderContactLess extends Activity
             "GET PIN TRY COUNTER"
             };
         ArrayAdapter<String> commadsTable = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, commadsTableNames);
-        mCommandsSpinner = (Spinner) findViewById(R.id.APDU_spinner_table);
+        mCommandsSpinner = findViewById(R.id.APDU_spinner_table);
         mCommandsSpinner.setAdapter(commadsTable);
         mCommandsSpinner.setSelection(0);
         mCommandsSpinner.setOnItemSelectedListener(new OnItemSelectedListener()
