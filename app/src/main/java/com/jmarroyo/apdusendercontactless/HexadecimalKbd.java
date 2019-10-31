@@ -171,4 +171,13 @@ class HexadecimalKbd {
         edittext.setInputType(edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 
+    void unregisterEditText(int resid){
+        EditText edittext = mHostActivity.findViewById(resid);
+        edittext.setOnFocusChangeListener(null);
+
+        edittext.setOnClickListener(null);
+
+        edittext.setOnTouchListener(null);
+    }
+
 }

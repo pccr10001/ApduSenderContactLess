@@ -16,4 +16,5 @@
     <string name="button_ClearLog_name">Clear Log</string>
     <string name="button_SetNFC_name">Set NFC</string>
     <string name="button_Paste_name">Paste</string>
+    <string name="check_box_keyboard">Show custom keyboard</string>
 </resources>

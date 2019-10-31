@@ -58,6 +58,7 @@ public class ApduSenderContactLess extends Activity {
 
     HexadecimalKbd mHexKbd;
 
+    private CheckBox mCheckKeyboard;
     private CheckBox mCheckRaw;
     private CheckBox mCheckResp;
 
@@ -110,13 +111,7 @@ public class ApduSenderContactLess extends Activity {
         respAPDU = null;
 
         mHexKbd = new HexadecimalKbd(this, R.id.keyboardview, R.xml.hexkbd);
-        mHexKbd.registerEditText(R.id.editCLA);
-        mHexKbd.registerEditText(R.id.editINS);
-        mHexKbd.registerEditText(R.id.editP1);
-        mHexKbd.registerEditText(R.id.editP2);
-        mHexKbd.registerEditText(R.id.editLc);
-        mHexKbd.registerEditText(R.id.editDataIn);
-        mHexKbd.registerEditText(R.id.editLe);
+
 
 
         txtLog = findViewById(R.id.textLog);
@@ -257,6 +252,24 @@ public class ApduSenderContactLess extends Activity {
                     }
                 } else {
                     vShowGeneralMesg("Length must be greater than 8 chars !");
+                }
+            }
+        });
+
+        mCheckKeyboard = findViewById(R.id.check_box_keyboard);
+        final int[] resids = {R.id.editCLA, R.id.editINS, R.id.editP1, R.id.editP2, R.id.editLc, R.id.editDataIn, R.id.editLe};
+        mCheckKeyboard.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    for(int id : resids){
+                        mHexKbd.registerEditText(id);
+                    }
+                } else {
+                    for(int id : resids){
+                        mHexKbd.unregisterEditText(id);
+                    }
+
                 }
             }
         });
@@ -708,7 +721,7 @@ public class ApduSenderContactLess extends Activity {
     @Override
     public void onBackPressed() {
         if (mHexKbd.isCustomKeyboardVisible()) mHexKbd.hideCustomKeyboard();
-        else this.finish();
+        else super.onBackPressed(); //or finish()
     }
 
     public void HideKbd() {

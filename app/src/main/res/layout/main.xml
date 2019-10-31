@@ -175,6 +175,15 @@
                 android:textSize="13dp"
                 android:layout_marginStart="10dp" />
 
+            <CheckBox
+                android:id="@+id/check_box_keyboard"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5"
+                android:checked="true"
+                android:text="@string/check_box_keyboard" />
         </LinearLayout>
         
         <TextView
