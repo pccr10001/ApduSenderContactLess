@@ -155,7 +155,8 @@
                 android:ems="10"
                 android:maxLength="2"
                 android:text=""
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:layout_marginStart="10dp" />
             <TextView
                 android:id="@+id/textLe"
                 android:layout_width="wrap_content"
@@ -171,7 +172,9 @@
                 android:ems="10"
                 android:maxLength="2"
                 android:text=""
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:layout_marginStart="10dp" />
+
         </LinearLayout>
         
         <TextView
@@ -189,7 +192,8 @@
             android:ems="10"
             android:maxLength="254"
             android:text=""
-            android:textSize="13dp" />
+            android:textSize="13dp"
+            android:layout_marginStart="10dp" />
         <Spinner
             android:id="@+id/APDU_spinner_table"
             android:layout_width="fill_parent"
@@ -216,6 +220,7 @@
                 android:text="@string/check_box_resp_name"
                 android:layout_weight="5">
             </CheckBox>
+
         </LinearLayout>
     
         <LinearLayout
@@ -271,6 +276,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
+
     </LinearLayout>
 
     <android.inputmethodservice.KeyboardView

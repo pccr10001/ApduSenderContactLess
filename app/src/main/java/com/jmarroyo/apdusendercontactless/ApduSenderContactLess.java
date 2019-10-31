@@ -118,6 +118,7 @@ public class ApduSenderContactLess extends Activity {
         mHexKbd.registerEditText(R.id.editDataIn);
         mHexKbd.registerEditText(R.id.editLe);
 
+
         txtLog = findViewById(R.id.textLog);
         icoNfc = findViewById(R.id.imageNfc);
         icoNfc.setImageResource(R.drawable.ic_nfc_off);
@@ -263,8 +264,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckRaw = findViewById(R.id.check_box_raw);
         mCheckRaw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (mFirstDetected == true && myTag.isConnected()) ;
-                else {
+                if (!mFirstDetected && !myTag.isConnected()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
@@ -329,8 +329,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckResp = findViewById(R.id.check_box_resp);
         mCheckResp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if ((mFirstDetected == true) && (myTag.isConnected())) ;
-                else {
+                if (!mFirstDetected && !myTag.isConnected()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
