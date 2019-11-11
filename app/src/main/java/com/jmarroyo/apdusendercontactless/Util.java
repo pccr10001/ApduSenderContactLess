@@ -18,11 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.jmarroyo.apdusendercontactless;
 
-public class Util
-{
+public class Util {
 
-    public static String szByteHex2String(byte datain)
-    {
+    public static String szByteHex2String(byte datain) {
         String[] CHARS0F = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
 
         int idata = datain & 0xFF;

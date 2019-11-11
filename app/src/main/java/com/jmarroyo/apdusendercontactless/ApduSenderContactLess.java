@@ -113,7 +113,6 @@ public class ApduSenderContactLess extends Activity {
         mHexKbd = new HexadecimalKbd(this, R.id.keyboardview, R.xml.hexkbd);
 
 
-
         txtLog = findViewById(R.id.textLog);
         icoNfc = findViewById(R.id.imageNfc);
         icoNfc.setImageResource(R.drawable.ic_nfc_off);
@@ -265,12 +264,12 @@ public class ApduSenderContactLess extends Activity {
         mCheckKeyboard.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    for(int id : resids){
+                if (isChecked) {
+                    for (int id : resids) {
                         mHexKbd.registerEditText(id);
                     }
                 } else {
-                    for(int id : resids){
+                    for (int id : resids) {
                         mHexKbd.unregisterEditText(id);
                     }
 
@@ -714,7 +713,7 @@ public class ApduSenderContactLess extends Activity {
             icoCard.setImageResource(R.drawable.ic_icc_off);
         }
 
-        if(mAdapter != null) {
+        if (mAdapter != null) {
             mAdapter.disableForegroundDispatch(this);
         }
     }
