@@ -142,8 +142,8 @@ public class ApduSenderContactLess extends Activity {
         mSendAPDUButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected == true && myTag.isConnected()) {
-                    if (mShowAtr == true) {
+                if (mFirstDetected && myTag.isConnected()) {
+                    if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
                         icoCard.setImageResource(R.drawable.ic_icc_on);
@@ -174,8 +174,8 @@ public class ApduSenderContactLess extends Activity {
         mClearLogButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected == true && myTag.isConnected()) {
-                    if (mShowAtr == true) {
+                if (mFirstDetected && myTag.isConnected()) {
+                    if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
                         icoCard.setImageResource(R.drawable.ic_icc_on);
@@ -232,27 +232,31 @@ public class ApduSenderContactLess extends Activity {
             @Override
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                String ClipBoardData = clipboard.getText().toString().toUpperCase();
+                String ClipBoardData;
+                if (clipboard != null) {
+                    ClipBoardData = clipboard.getText().toString().toUpperCase();
 
-                if (ClipBoardData.length() > 254) {
-                    vShowGeneralMesg("Max Length to Paste is 254 chars !");
-                } else if (ClipBoardData.length() >= 8) {
-                    if ((ClipBoardData.length() % 2) != 0) {
-                        vShowGeneralMesg("String Length must be Even !");
-                    }
-                    if (!ClipBoardData.matches("^[0-9A-F]+$")) {
-                        clearlog();
-                        print(ClipBoardData);
-                        vShowGeneralMesg("String should be '0'-'9' or 'A'-'F'");
+                    if (ClipBoardData.length() > 254) {
+                        vShowGeneralMesg("Max Length to Paste is 254 chars !");
+                    } else if (ClipBoardData.length() >= 8) {
+                        if ((ClipBoardData.length() % 2) != 0) {
+                            vShowGeneralMesg("String Length must be Even !");
+                        }
+                        if (!ClipBoardData.matches("^[0-9A-F]+$")) {
+                            clearlog();
+                            print(ClipBoardData);
+                            vShowGeneralMesg("String should be '0'-'9' or 'A'-'F'");
+                        } else {
+                            vSetBuiltinCommand();
+                            editDataIn.setText(ClipBoardData);
+                            HideKbd();
+                            vShowGeneralMesg("Data Pasted Successfully");
+                        }
                     } else {
-                        vSetBuiltinCommand();
-                        editDataIn.setText(ClipBoardData);
-                        HideKbd();
-                        vShowGeneralMesg("Data Pasted Successfully");
+                        vShowGeneralMesg("Length must be greater than 8 chars !");
                     }
-                } else {
-                    vShowGeneralMesg("Length must be greater than 8 chars !");
                 }
+
             }
         });
 
@@ -415,7 +419,7 @@ public class ApduSenderContactLess extends Activity {
                 "GET LAST ONLINE ATC",
                 "GET PIN TRY COUNTER"
         };
-        ArrayAdapter<String> commadsTable = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, commadsTableNames);
+        ArrayAdapter<String> commadsTable = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, commadsTableNames);
         mCommandsSpinner = findViewById(R.id.APDU_spinner_table);
         mCommandsSpinner.setAdapter(commadsTable);
         mCommandsSpinner.setSelection(0);
@@ -700,8 +704,8 @@ public class ApduSenderContactLess extends Activity {
         byteAPDU = null;
         respAPDU = null;
 
-        if ((mFirstDetected == true) && (myTag.isConnected())) {
-            if (mShowAtr == true) {
+        if ((mFirstDetected) && (myTag.isConnected())) {
+            if (mShowAtr) {
                 icoCard.setImageResource(R.drawable.ic_icc_on_atr);
             } else {
                 icoCard.setImageResource(R.drawable.ic_icc_on);
