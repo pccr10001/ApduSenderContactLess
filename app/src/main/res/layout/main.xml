@@ -21,7 +21,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textNfc_name"
-                android:textSize="20dp" >
+                android:textSize="20sp" >
             </TextView>
         </LinearLayout>
     
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textCard_name"
-                android:textSize="11dp" >
+                android:textSize="11sp" >
             </TextView>
         </LinearLayout>
     
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textCLA_name"
-                    android:textSize="12dp">
+                    android:textSize="12sp">
                 </TextView>
                 <EditText
                     android:id="@+id/editCLA"
@@ -66,7 +66,8 @@
                     android:ems="10"
                     android:maxLength="2"
                     android:text=""
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textINS_name"
-                    android:textSize="12dp" >
+                    android:textSize="12sp" >
                 </TextView>
                 <EditText
                     android:id="@+id/editINS"
@@ -88,7 +89,8 @@
                     android:ems="10"
                     android:maxLength="2"
                     android:text=""
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textP1_name"
-                    android:textSize="12dp" >
+                    android:textSize="12sp" >
                 </TextView>
                 <EditText
                     android:id="@+id/editP1"
@@ -110,7 +112,8 @@
                     android:ems="10"
                     android:maxLength="2"
                     android:text=""
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />
             </LinearLayout>
  
             <LinearLayout
@@ -122,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/textP2_name"
-                    android:textSize="12dp" >
+                    android:textSize="12sp" >
                 </TextView>
                 <EditText
                     android:id="@+id/editP2"
@@ -132,7 +135,8 @@
                     android:ems="10"
                     android:maxLength="2"
                     android:text=""
-                    android:textSize="12dp" />
+                    android:textSize="12sp"
+                    android:layout_marginStart="10dp" />
             </LinearLayout>
         </LinearLayout> 
     
@@ -145,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textLc_name"
-                android:textSize="14dp" >
+                android:textSize="14sp" >
             </TextView>
             <EditText
                 android:id="@+id/editLc"
@@ -155,14 +159,14 @@
                 android:ems="10"
                 android:maxLength="2"
                 android:text=""
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_marginStart="10dp" />
             <TextView
                 android:id="@+id/textLe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/textLe_name"
-                android:textSize="14dp" >
+                android:textSize="14sp" >
             </TextView>
             <EditText
                 android:id="@+id/editLe"
@@ -172,7 +176,7 @@
                 android:ems="10"
                 android:maxLength="2"
                 android:text=""
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:layout_marginStart="10dp" />
 
             <CheckBox
@@ -191,7 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/textDataIn_name"
-            android:textSize="14dp" >
+            android:textSize="14sp" >
         </TextView>
         <EditText
             android:id="@+id/editDataIn"
@@ -201,7 +205,7 @@
             android:ems="10"
             android:maxLength="254"
             android:text=""
-            android:textSize="13dp"
+            android:textSize="13sp"
             android:layout_marginStart="10dp" />
         <Spinner
             android:id="@+id/APDU_spinner_table"
@@ -240,7 +244,7 @@
             <Button
                 android:id="@+id/button_SendApdu"
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:text="@string/button_SendApdu_name"
                 android:layout_weight="10"/>
