@@ -280,7 +280,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckRaw = findViewById(R.id.check_box_raw);
         mCheckRaw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!mFirstDetected && !myTag.isConnected()) {
+                if (!mFirstDetected && myTag == null || !myTag.isConnected()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
@@ -345,7 +345,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckResp = findViewById(R.id.check_box_resp);
         mCheckResp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!mFirstDetected && !myTag.isConnected()) {
+                if (!mFirstDetected && myTag == null || !myTag.isConnected()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
@@ -864,7 +864,7 @@ public class ApduSenderContactLess extends Activity {
                 }
             }
             if (myTag.isConnected()) {
-                if (mShowAtr == true) {
+                if (mShowAtr) {
                     icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                 } else {
                     icoCard.setImageResource(R.drawable.ic_icc_on);
@@ -911,8 +911,8 @@ public class ApduSenderContactLess extends Activity {
                 icoCard.setImageResource(R.drawable.ic_icc_off);
             }
         }
-        if (mFirstDetected == true && myTag.isConnected()) {
-            if (mShowAtr == true) {
+        if (mFirstDetected && myTag.isConnected()) {
+            if (mShowAtr) {
                 icoCard.setImageResource(R.drawable.ic_icc_on_atr);
             } else {
                 icoCard.setImageResource(R.drawable.ic_icc_on);
