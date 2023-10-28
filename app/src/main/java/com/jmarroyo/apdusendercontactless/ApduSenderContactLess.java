@@ -200,8 +200,8 @@ public class ApduSenderContactLess extends Activity {
         mSetNFCButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected == true && myTag.isConnected()) {
-                    if (mShowAtr == true) {
+                if (mFirstDetected && myTag.isConnected()) {
+                    if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
                         icoCard.setImageResource(R.drawable.ic_icc_on);
@@ -621,8 +621,8 @@ public class ApduSenderContactLess extends Activity {
         byteAPDU = null;
         respAPDU = null;
 
-        if ((mFirstDetected == true) && (myTag.isConnected())) {
-            if (mShowAtr == true) {
+        if ((mFirstDetected) && (myTag.isConnected())) {
+            if (mShowAtr) {
                 icoCard.setImageResource(R.drawable.ic_icc_on_atr);
             } else {
                 icoCard.setImageResource(R.drawable.ic_icc_on);
