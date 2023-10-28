@@ -972,7 +972,7 @@ public class ApduSenderContactLess extends Activity {
 
         } else if (data.length == 2) {
             byte[] sw12 = new byte[2];
-            System.arraycopy(data, data.length - 2, sw12, 0, 2);
+            System.arraycopy(data, 0, sw12, 0, 2);
             try {
                 print("SW1-SW2 " + getHexString(sw12));
                 print(RetStatusWord.getSWDescription(Util.szByteHex2String(sw12[0]) + Util.szByteHex2String(sw12[1])));
