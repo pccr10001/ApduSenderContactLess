@@ -30,9 +30,7 @@ import android.content.IntentFilter.MalformedMimeTypeException;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.IsoDep;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.*;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -47,9 +45,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.util.Arrays;
+
 
 public class ApduSenderContactLess extends Activity {
 
@@ -141,7 +141,7 @@ public class ApduSenderContactLess extends Activity {
         mSendAPDUButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected && myTag.isConnected()) {
+                if (mFirstDetected && isTagAlive()) {
                     if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
@@ -173,7 +173,7 @@ public class ApduSenderContactLess extends Activity {
         mClearLogButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected && myTag.isConnected()) {
+                if (mFirstDetected && isTagAlive()) {
                     if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
@@ -200,7 +200,7 @@ public class ApduSenderContactLess extends Activity {
         mSetNFCButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mFirstDetected && myTag.isConnected()) {
+                if (mFirstDetected && isTagAlive()) {
                     if (mShowAtr) {
                         icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                     } else {
@@ -280,7 +280,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckRaw = findViewById(R.id.check_box_raw);
         mCheckRaw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!mFirstDetected && myTag == null || !myTag.isConnected()) {
+                if (!mFirstDetected && myTag == null || !isTagAlive()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
@@ -345,7 +345,7 @@ public class ApduSenderContactLess extends Activity {
         mCheckResp = findViewById(R.id.check_box_resp);
         mCheckResp.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!mFirstDetected && myTag == null || !myTag.isConnected()) {
+                if (!mFirstDetected && myTag == null || !isTagAlive()) {
                     icoCard.setImageResource(R.drawable.ic_icc_off);
                     clearlog();
                     mSendAPDUButton.setEnabled(false);
@@ -602,7 +602,7 @@ public class ApduSenderContactLess extends Activity {
         resolveIntent(getIntent());
 
         mAdapter = NfcAdapter.getDefaultAdapter(this);
-        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_MUTABLE);
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         try {
             ndef.addDataType("*/*");
@@ -621,7 +621,7 @@ public class ApduSenderContactLess extends Activity {
         byteAPDU = null;
         respAPDU = null;
 
-        if ((mFirstDetected) && (myTag.isConnected())) {
+        if ((mFirstDetected) && (isTagAlive())) {
             if (mShowAtr) {
                 icoCard.setImageResource(R.drawable.ic_icc_on_atr);
             } else {
@@ -674,8 +674,9 @@ public class ApduSenderContactLess extends Activity {
                 TextNfc.setText("NFC ENABLED");
                 icoNfc.setImageResource(R.drawable.ic_nfc_on);
                 print("This program is distributed in the hope that it will be useful for educational purposes.  Enjoy! ");
+                mAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechLists);
             }
-            mAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechLists);
+
         } else {
             clearlog();
             icoNfc.setImageResource(R.drawable.ic_nfc_off);
@@ -703,15 +704,6 @@ public class ApduSenderContactLess extends Activity {
         byteAPDU = null;
         respAPDU = null;
 
-        if ((mFirstDetected) && (myTag.isConnected())) {
-            if (mShowAtr) {
-                icoCard.setImageResource(R.drawable.ic_icc_on_atr);
-            } else {
-                icoCard.setImageResource(R.drawable.ic_icc_on);
-            }
-        } else {
-            icoCard.setImageResource(R.drawable.ic_icc_off);
-        }
 
         if (mAdapter != null) {
             mAdapter.disableForegroundDispatch(this);
@@ -854,7 +846,7 @@ public class ApduSenderContactLess extends Activity {
             final Tag t = (Tag) tag;
             myTag = IsoDep.get(t);
             mFirstDetected = true;
-            if (!myTag.isConnected()) {
+            if (!isTagAlive()) {
                 try {
                     myTag.connect();
                     myTag.setTimeout(5000);
@@ -863,7 +855,7 @@ public class ApduSenderContactLess extends Activity {
                     return;
                 }
             }
-            if (myTag.isConnected()) {
+            if (isTagAlive()) {
                 if (mShowAtr) {
                     icoCard.setImageResource(R.drawable.ic_icc_on_atr);
                 } else {
@@ -911,15 +903,9 @@ public class ApduSenderContactLess extends Activity {
                 icoCard.setImageResource(R.drawable.ic_icc_off);
             }
         }
-        if (mFirstDetected && myTag.isConnected()) {
-            if (mShowAtr) {
-                icoCard.setImageResource(R.drawable.ic_icc_on_atr);
-            } else {
-                icoCard.setImageResource(R.drawable.ic_icc_on);
-            }
-        } else {
-            icoCard.setImageResource(R.drawable.ic_icc_off);
-        }
+
+
+
     }
 
     private void vSetBuiltinCommand() {
@@ -1046,6 +1032,15 @@ public class ApduSenderContactLess extends Activity {
         }
         return hex;
     }
-
+    private boolean isTagAlive(){
+        try{
+            if (myTag.isConnected()){
+                return true;
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return false;
+    }
 }
 
