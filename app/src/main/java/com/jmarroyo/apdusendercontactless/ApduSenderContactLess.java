@@ -416,7 +416,8 @@ public class ApduSenderContactLess extends Activity {
                 "READ RECORD SFI:02 R:02",
                 "GET ATC",
                 "GET LAST ONLINE ATC",
-                "GET PIN TRY COUNTER"
+                "GET PIN TRY COUNTER",
+                "SELECT TESLA NAK"
         };
         ArrayAdapter<String> commadsTable = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, commadsTableNames);
         mCommandsSpinner = findViewById(R.id.APDU_spinner_table);
@@ -554,7 +555,11 @@ public class ApduSenderContactLess extends Activity {
                         HideKbd();
                         vShowGeneralMesg("Get Tag 9F17");
                         break;
-
+                    case 17: //SELECT TESLA NAK
+                        vSetBuiltinCommand();
+                        editDataIn.setText("00A404000FF465736C614C6F6769633030325801");
+                        HideKbd();
+                        break;
 
                     default:
                         break;

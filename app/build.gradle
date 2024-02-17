@@ -4,7 +4,7 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        applicationId "com.jmarroyo.apdusendercontactless"
+        applicationId "li.power.app.apdusendercontactless"
         minSdkVersion 24
         targetSdkVersion 34
     }
